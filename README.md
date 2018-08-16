@@ -19,3 +19,7 @@
             .colorRule(Kaleidoscope.RandomColorRule() /*爱心颜色Rule，提供一个随机颜色Rule*/)
             .start();
 ```
+
+效果图：
+
+![](https://github.com/xionghg/AnimatorTest/blob/master/picture/Kaleidoscope.gif?raw=true)
