@@ -62,12 +62,7 @@ public class Kaleidoscope {
     };
 
     private Kaleidoscope(Builder builder) {
-        if (builder.activity != null) {
-            container = builder.activity.findViewById(android.R.id.content);
-        } else {
-            container = builder.frameLayout;
-        }
-        Objects.requireNonNull(container, "a FrameLayout container is needed!");
+        container = Objects.requireNonNull(builder.frameLayout, "a FrameLayout container is needed!");
         colorRule = Objects.requireNonNull(builder.colorRule);
         sizeRule = Objects.requireNonNull(builder.sizeRule);
         container.getGlobalVisibleRect(containerArea);
@@ -77,7 +72,7 @@ public class Kaleidoscope {
     }
 
     public static Builder with(Activity activity) {
-        return new Builder(activity);
+        return with(activity.findViewById(android.R.id.content));
     }
 
     public static Builder with(FrameLayout frameLayout) {
@@ -230,17 +225,12 @@ public class Kaleidoscope {
     }
 
     public static final class Builder {
-        private Activity activity;
         private FrameLayout frameLayout;
         private int total = 100;
         private int duration = 5000;
         private int singleDuration = 1200;
         private IColorRule colorRule = current -> Color.RED;
         private ISizeRule sizeRule = current -> 52;
-
-        private Builder(Activity val) {
-            activity = val;
-        }
 
         private Builder(FrameLayout val) {
             frameLayout = val;
